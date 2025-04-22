@@ -1,0 +1,31 @@
+<footer class="bg-black-violet" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="sr-only">Footer</h2>
+  <div class="mx-auto px-6 py-4 sm:py-4 lg:px-8 lg:py-4">
+    <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+    <div>
+      <div class="text-4xl font-extrabold py-6"><%= link_to "Trekkwire", root_path, class:"text-white"%></div>
+      <div class="text-white text-sm">© <%= Date.current.year %> <%= Jumpstart.config.business_name %> <%= t(".reserved") %></div>
+    </div>
+      <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0 pb-4">
+        <div class="md:grid md:grid-cols-2 md:gap-8">
+          <div>
+            <ul role="list" class="list-none mt-6 space-y-4">
+              <li><%= link_to t(".about"), about_path, class: "text-sm leading-6 text-white no-underline block px-4 lg:my-0 my-2" %></li>
+              <li><%= link_to "Find a guide", new_user_session_path, class: "text-sm leading-6 text-white no-underline block lg:my-0 my-2 px-4" %></li>
+              <li><%= link_to "Become a guide", become_a_guide_path, class: "text-sm leading-6 text-white no-underline block lg:my-0 my-2 px-4" %></li>
+            </ul>
+          </div>
+          <div class="mt-10 md:mt-0">
+            <ul role="list" class="list-none mt-6 space-y-4">
+              <li><%= link_to t(".careers"), careers_path, class: "text-sm leading-6 text-white no-underline block px-4 lg:my-0 my-2" %></li>
+              <li><%= link_to t(".privacy"), privacy_path, class: "text-sm leading-6 text-white no-underline block lg:my-0 my-2 px-4" %></li>
+              <li><%= link_to t(".terms"), terms_path, class: "text-sm leading-6 text-white no-underline block lg:my-0 my-2 px-4" %></li>
+            </ul>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+

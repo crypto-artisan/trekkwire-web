@@ -1,0 +1,17 @@
+<%# Place any links for the RIGHT side of the nav bar here. Be sure to add class: "nav-link" to each item for proper spacing. %>
+
+<% if Jumpstart.config.payments_enabled? && (!user_signed_in? || current_account_admin?) && not_subscribed? %>
+  <%#= nav_link_to t(".pricing"), pricing_path, class: "nav-link" %>
+<% end %>
+
+<%= nav_link_to tag.span(t(".announcements")), announcements_path, class: ["nav-link text-white", unread_announcements_class(current_user)] %>
+<% if user_signed_in? %>
+  <% if current_account.customer_type == "traveler" %>
+    <%= nav_link_to t(".MyTrips"), scheduled_tours_path, class: "nav-link text-white" %>
+    <%= nav_link_to "Become a guide", become_a_guide_path, class: "nav-link text-white" %>
+  <% end %>
+<% else %>
+  <%= nav_link_to "Find a guide", new_user_session_path, class: "nav-link text-white" %>
+  <%= nav_link_to "Become a guide", become_a_guide_path, class: "nav-link text-white" %>
+  <%= nav_link_to t("static.about.title"), about_path, class: "nav-link text-white" %>
+<% end %>

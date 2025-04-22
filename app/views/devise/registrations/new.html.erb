@@ -1,0 +1,79 @@
+<div>
+  <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+    <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-3/2 rotate-[30deg] bg-gradient-to-tr from-[#ff4694] to-[#9089fc] opacity-50 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+  </div>
+  <% content_for :form_block do %>
+  <div class="mb-4 text-center">
+    <h2 class="mb-1"><%= t('.sign_up') %></h2>
+    <%= t(".login_html", link: link_to("log in to your account", new_session_path(resource_name), class: "font-semibold")) %>
+  </div>
+
+  <% if @account_invitation %>
+    <div class="flex items-center justify-center mb-4 text-center">
+      <%= image_tag avatar_url_for(@account_invitation.account), class: "h-5 w-5 rounded-full inline-block mr-1" %>
+      <div>
+        <strong><%= @account_invitation.invited_by.name %></strong> invited you to join <strong><%= @account_invitation.account.name %></strong>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name, invite: params[:invite])) do |f| %>
+    <%= render "shared/error_messages", resource: resource %>
+
+    <%# Add any extra fields when creating an Account as part of registration %>
+    <%#= f.fields_for :owned_accounts do |a| %>
+<!--      <div class="form-group">-->
+        <%#= a.label :name %>
+        <%#= a.text_field :name, autofocus: true, placeholder: true, class: "form-control" %>
+<!--      </div>-->
+    <%# end %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, autocomplete: "name", placeholder: true, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, autocomplete: "email", placeholder: true, class: "form-control" %>
+    </div>    
+
+    <div class="form-group">
+      <%= f.label :phone %>
+      <%= f.text_field :phone, autocomplete: "phone_number", placeholder: "555-555-5555", class: "form-control" %>
+    </div>
+
+    <%= hidden_field_tag :user_type, params[:user_type] %>
+
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: true, class: "form-control" %>
+      <% if @minimum_password_length %>
+        <p class="mt-3 text-sm text-gray-600"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></p>
+      <% end %>
+    </div>
+
+<!--    <div class="form-group">-->
+      <%#= f.label :time_zone %>
+      <%#= f.time_zone_select :time_zone, nil, { default: browser_time_zone.name }, { class: "select" } %>
+<!--    </div>-->
+
+    <div class="form-group">
+      <%= invisible_captcha %>
+    </div>
+
+    <div class="form-group">
+      <%= f.check_box :terms_of_service, id: "tos", class: "form-checkbox mr-1" %>
+      <label for="tos" class="inline-block text-sm"><%= t ".terms_html", terms: link_to("terms of service", terms_path, target: "_blank", class: "btn-link"), privacy: link_to("privacy policy", privacy_path, target: "_blank", class: "btn-link") %></label>
+    </div>
+
+    <div class="form-group">
+      <%= f.button button_text(t('.sign_up'), disable_with: t(".submitting")), class: "mt-2 flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white btn btn-expanded" %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+<% end %>
+
+<%= render "devise/shared/form_block" %>
+</div>

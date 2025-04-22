@@ -1,0 +1,20 @@
+--- !ruby/object:Jumpstart::Configuration
+application_name: Trekkwire
+business_name: Trekkwire
+domain: trekkwire.com
+support_email: support@trekkwire.com
+default_from_email: Trekkwire <support@trekkwire.com>
+background_job_processor: async
+email_provider: sendgrid
+personal_accounts: false
+register_with_account: true
+collect_billing_address: true
+apns: false
+fcm: false
+integrations:
+omniauth_providers:
+- facebook
+- google-oauth2
+payment_processors:
+- stripe
+multitenancy:

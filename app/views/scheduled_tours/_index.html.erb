@@ -1,0 +1,7 @@
+<div id="<%= dom_id(scheduled_tour, :index) %>">
+  <%= turbo_stream_from scheduled_tour %>
+  <tr>
+    <%= render partial: "scheduled_tours/scheduled_tour_row", locals: {scheduled_tour: scheduled_tour} %>
+  </tr>
+</div>
+
